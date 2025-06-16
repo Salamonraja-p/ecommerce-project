@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+       font-family: "Segoe UI", "Noto Color Emoji", "Apple Color Emoji", "Roboto", sans-serif;
+    }
+  </style>
+</head>
+<body>
+  <nav style="margin-bottom: 20px; font-size: 18px;">
+  <a href="/" style="margin-right: 10px;">🏠 Home</a>
+  <a href="/product-list.html" style="margin-right: 10px;">🛍 Products</a>
+  <a href="/cart.html" style="margin-right: 10px;">🛒 Cart</a>
+  <a href="/order-history.html" style="margin-right: 10px;">🧾 Orders</a>
+  <a href="/register.html" style="margin-right: 10px;">🔐 Register</a>
+  <a href="/login.html" style="margin-right: 10px;">🔑 Login</a>
+  <a href="/admin/manage-products.html" style="margin-right: 10px;">🛠 Admin</a>
+</nav>
+
+  <h2>Your Shopping Cart</h2>
+  <div id="cart"></div>
+  <h3 id="total"></h3>
+
+  <button onclick="clearCart()">🗑 Clear Cart</button>
+  <button onclick="checkout()">🧾 Checkout</button>
+  <br><br>
+  <a href="product-list.html">⬅ Back to Products</a>
+
+  <script>
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    const cartDiv = document.getElementById("cart");
+    const totalDisplay = document.getElementById("total");
+
+    if (cart.length === 0) {
+      cartDiv.innerHTML = "<p>🛒 Your cart is empty.</p>";
+    } else {
+      let total = 0;
+      cart.forEach(item => {
+        total += item.price * item.quantity;
+        const div = document.createElement("div");
+        div.innerHTML = `
+          <h4>${item.name}</h4>
+          <p>Price: ₹${item.price} × ${item.quantity}</p>
+          <p>Total: ₹${item.price * item.quantity}</p>
+          <hr>
+        `;
+        cartDiv.appendChild(div);
+      });
+      totalDisplay.innerText = `Total: ₹${total}`;
+    }
+
+    function clearCart() {
+      localStorage.removeItem("cart");
+      location.reload();
+    }
+
+    function checkout() {
+      if (cart.length === 0) {
+        alert("Your cart is empty.");
+        return;
+      }
+
+      const email = prompt("Enter your email to place the order:");
+      if (!email || !email.includes("@")) {
+        alert("❌ Please enter a valid email address.");
+        return;
+      }
+
+      const order = {
+        customerEmail: email,
+        items: cart.map(item => ({
+          productId: item.id,
+          productName: item.name,
+          price: item.price,
+          quantity: item.quantity
+        }))
+      };
+
+      fetch('/orders', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(order)
+      })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error("Order failed");
+        }
+        return res.text();
+      })
+      .then(message => {
+        alert(message || "✅ Order placed successfully!");
+        localStorage.removeItem("cart");
+        window.location.href = "/product-list.html";
+      })
+      .catch(err => {
+        console.error(err);
+        alert("❌ Failed to place order.");
+      });
+    }
+  </script>
+</body>
+</html>

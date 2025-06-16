@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+  <title>Admin - Manage Products</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+       font-family: "Segoe UI", "Noto Color Emoji", "Apple Color Emoji", "Roboto", sans-serif;
+    }
+  </style>
+
+</head>
+<body>
+    <nav style="margin-bottom: 20px; font-size: 18px;">
+  <a href="/" style="margin-right: 10px;">🏠 Home</a>
+  <a href="/product-list.html" style="margin-right: 10px;">🛍 Products</a>
+  <a href="/cart.html" style="margin-right: 10px;">🛒 Cart</a>
+  <a href="/order-history.html" style="margin-right: 10px;">🧾 Orders</a>
+  <a href="/register.html" style="margin-right: 10px;">🔐 Register</a>
+  <a href="/login.html" style="margin-right: 10px;">🔑 Login</a>
+  <a href="/admin/manage-products.html" style="margin-right: 10px;">🛠 Admin</a>
+</nav>
+
+  <h2>🛠 Admin - Manage Products</h2>
+
+  <form id="productForm" onsubmit="saveProduct(); return false;">
+    <input type="text" id="name" placeholder="Product Name" required />
+    <input type="number" id="price" placeholder="Price" required />
+    <input type="text" id="description" placeholder="Description" required />
+    <input type="number" id="quantity" placeholder="Quantity" required />
+    <button type="submit">Save Product</button>
+  </form>
+
+  <hr>
+  <div id="productList"></div>
+
+  <script>
+    function fetchProducts() {
+      fetch("/products")
+        .then(res => res.json())
+        .then(data => {
+          const list = document.getElementById("productList");
+          list.innerHTML = "<h3>Existing Products</h3>";
+          data.forEach(p => {
+            list.innerHTML += `
+              <div>
+                <strong>${p.name}</strong> - ₹${p.price} <br>
+                ${p.description} (Qty: ${p.quantity})
+                <button onclick="deleteProduct(${p.id})">🗑 Delete</button>
+                <hr>
+              </div>
+            `;
+          });
+        });
+    }
+
+    function saveProduct() {
+      const product = {
+        name: document.getElementById("name").value,
+        price: parseFloat(document.getElementById("price").value),
+        description: document.getElementById("description").value,
+        quantity: parseInt(document.getElementById("quantity").value)
+      };
+
+      fetch("/products", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(product)
+      }).then(() => {
+        alert("✅ Product saved!");
+        fetchProducts();
+        document.getElementById("productForm").reset();
+      });
+    }
+
+    function deleteProduct(id) {
+      fetch(`/products/${id}`, { method: "DELETE" })
+        .then(() => {
+          alert("🗑 Product deleted");
+          fetchProducts();
+        });
+    }
+
+    fetchProducts();
+  </script>
+</body>
+</html>

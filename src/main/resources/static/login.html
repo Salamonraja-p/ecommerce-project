@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Login</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <style>
+    body {
+       font-family: "Segoe UI", "Noto Color Emoji", "Apple Color Emoji", "Roboto", sans-serif;
+    }
+  </style>
+
+</head>
+<body>
+  <nav style="margin-bottom: 20px; font-size: 18px;">
+  <a href="/" style="margin-right: 10px;">🏠 Home</a>
+  <a href="/product-list.html" style="margin-right: 10px;">🛍 Products</a>
+  <a href="/cart.html" style="margin-right: 10px;">🛒 Cart</a>
+  <a href="/order-history.html" style="margin-right: 10px;">🧾 Orders</a>
+  <a href="/register.html" style="margin-right: 10px;">🔐 Register</a>
+  <a href="/login.html" style="margin-right: 10px;">🔑 Login</a>
+  <a href="/admin/manage-products.html" style="margin-right: 10px;">🛠 Admin</a>
+</nav>
+
+  <h2>Login</h2>
+  <form id="loginForm">
+    <input type="email" name="email" placeholder="Email" required><br><br>
+    <input type="password" name="password" placeholder="Password" required><br><br>
+    <button type="submit">Login</button>
+  </form>
+
+  <script>
+    document.getElementById("loginForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const formData = new FormData(this);
+      const user = {
+        email: formData.get("email"),
+        password: formData.get("password")
+      };
+
+      fetch("/users/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user)
+      })
+      .then(res => res.text())
+      .then(response => {
+        alert(response);
+        if (response === "Login successful") {
+          window.location.href = "/products.html";
+        }
+      })
+      .catch(error => {
+        alert("Login error");
+        console.error(error);
+      });
+    });
+  </script>
+</body>
+</html>

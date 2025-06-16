@@ -1,0 +1,208 @@
+/* Global Reset & Base */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+  background-color: #f7f7f7;
+  color: #333;
+  line-height: 1.6;
+  padding: 20px;
+}
+
+/* Header and Navigation */
+header, nav {
+  background-color: #0d6efd;
+  padding: 15px 20px;
+  color: white;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+nav a {
+  color: white;
+  margin: 0 12px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* Container */
+.container {
+  max-width: 1000px;
+  margin: auto;
+  background: white;
+  padding: 25px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Titles */
+h1, h2, h3 {
+  margin-bottom: 20px;
+  color: #0d6efd;
+}
+
+/* Product Cards */
+.product {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.product:hover {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.product h3 {
+  margin-bottom: 10px;
+  font-size: 20px;
+}
+
+.product p {
+  margin: 5px 0;
+}
+
+/* Buttons */
+button, .btn {
+  background-color: #0d6efd;
+  color: white;
+  border: none;
+  padding: 10px 16px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.3s ease;
+}
+
+button:hover, .btn:hover {
+  background-color: #084298;
+}
+
+/* Form Styles */
+form {
+  margin-bottom: 20px;
+}
+
+input, select {
+  padding: 10px;
+  width: 100%;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+input[type="submit"], .btn-primary {
+  background-color: #198754;
+  color: white;
+}
+
+input[type="submit"]:hover {
+  background-color: #146c43;
+}
+
+/* Alerts */
+.alert {
+  padding: 12px;
+  margin-bottom: 15px;
+  border-radius: 4px;
+}
+
+.alert-success {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.alert-error {
+  background-color: #f8d7da;
+  color: #842029;
+}
+/* ==== Card Component ==== */
+.card {
+  background: #ffffff;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+  overflow: hidden;          /* Keeps image corners rounded */
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
+}
+
+.card img {
+  width: 100%;
+  height: 180px;             /* Adjust as needed */
+  object-fit: cover;
+}
+
+.card-body {
+  padding: 16px 20px;
+}
+
+.card-body h3 {
+  font-size: 1.15rem;
+  margin-bottom: 8px;
+  color: #0d6efd;            /* Brand primary */
+}
+
+.card-body p {
+  margin-bottom: 12px;
+  color: #555;
+  line-height: 1.4;
+  font-size: 0.95rem;
+}
+
+.card-footer {
+  padding: 12px 20px 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-price {
+  font-weight: 700;
+  font-size: 1.05rem;
+  color: #198754;            /* Accent (green) */
+}
+
+.btn-add {
+  background: #0d6efd;
+  color: #fff;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background-color 0.25s ease;
+}
+
+.btn-add:hover {
+  background: #084298;       /* Darken on hover */
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  body {
+    padding: 10px;
+  }
+
+  nav {
+    font-size: 14px;
+  }
+
+  .container {
+    padding: 15px;
+  }
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Order History</title>
+  <link rel="stylesheet" href="/css/style.css">
+   <style>
+    body {
+       font-family: "Segoe UI", "Noto Color Emoji", "Apple Color Emoji", "Roboto", sans-serif;
+    }
+  </style>
+
+</head>
+<body>
+  <nav style="margin-bottom: 20px; font-size: 18px;">
+  <a href="/" style="margin-right: 10px;">🏠 Home</a>
+  <a href="/product-list.html" style="margin-right: 10px;">🛍 Products</a>
+  <a href="/cart.html" style="margin-right: 10px;">🛒 Cart</a>
+  <a href="/order-history.html" style="margin-right: 10px;">🧾 Orders</a>
+  <a href="/register.html" style="margin-right: 10px;">🔐 Register</a>
+  <a href="/login.html" style="margin-right: 10px;">🔑 Login</a>
+  <a href="/admin/manage-products.html" style="margin-right: 10px;">🛠 Admin</a>
+</nav>
+
+  <h2>🔎 Order History</h2>
+
+  <form onsubmit="fetchOrders(); return false;">
+    <input type="email" id="email" placeholder="Enter your email" required />
+    <button type="submit">View Orders</button>
+  </form>
+
+  <div id="orders"></div>
+
+  <script>
+    function fetchOrders() {
+      const email = document.getElementById("email").value.trim();
+
+      if (!email || !email.includes("@")) {
+        alert("❌ Please enter a valid email address.");
+        return;
+      }
+
+      fetch(`/orders/email/${encodeURIComponent(email)}`)
+        .then(res => {
+          if (!res.ok) {
+            throw new Error(`❌ Server returned status ${res.status}`);
+          }
+          return res.json();
+        })
+        .then(orders => {
+          const container = document.getElementById("orders");
+          container.innerHTML = "";
+
+          if (!orders || orders.length === 0) {
+            container.innerHTML = "<p>No orders found.</p>";
+            return;
+          }
+
+          orders.forEach(order => {
+            const div = document.createElement("div");
+            div.innerHTML = `<h3>Order #${order.id} - ${order.customerEmail}</h3>`;
+            if (order.items && order.items.length > 0) {
+              order.items.forEach(item => {
+                div.innerHTML += `
+                  <p>${item.productName} - ₹${item.price} × ${item.quantity}</p>
+                `;
+              });
+            } else {
+              div.innerHTML += `<p>No items in this order.</p>`;
+            }
+            div.innerHTML += "<hr>";
+            container.appendChild(div);
+          });
+        })
+        .catch(error => {
+          alert(error.message);
+          console.error("Fetch error:", error);
+        });
+    }
+  </script>
+</body>
+</html>
