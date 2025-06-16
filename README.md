@@ -1,26 +1,41 @@
-# E-Commerce Web Application
+# 🛒 Full-Stack E-Commerce Web Application
 
-This is a full-stack E-Commerce web application built using:
+A complete e-commerce platform built using **Spring Boot (Java)** for backend, **MySQL** for the database, and **HTML, CSS, JavaScript** for the frontend.
 
-- Spring Boot (Java)
-- MySQL
-- HTML, CSS, JavaScript
-
-## Features
-
-- User Registration & Login
-- Product Listing & Details
-- Shopping Cart
-- Order Checkout
-- Order History
-- Admin Panel to manage products
-
-## Technologies Used
-
+## 🔧 Tech Stack
 - Java + Spring Boot (Backend)
 - MySQL (Database)
-- HTML/CSS/JavaScript (Frontend)
+- HTML + CSS + JavaScript (Frontend)
+- RESTful APIs
+- Git + GitHub for version control
 
-## Author
+## ✨ Features
+- ✅ User Registration & Login
+- ✅ Product Listing by Category
+- ✅ Add to Cart
+- ✅ Place Orders
+- ✅ View Order History
+- ✅ Admin Panel to Manage Products
 
-Salamon Raja
+## 📁 Project Structure
+ecommerce/
+├── controller/
+├── model/
+├── repository/
+├── service/
+├── static/
+├── templates/
+└── application.properties
+
+## 🚀 How to Run
+1. Make sure MySQL is running and DB `ecommerce_db` is created.
+2. Open terminal and run:
+```bash
+mvn spring-boot:run
+
+Visit: http://localhost:9090
+
+🙋‍♂️ Author
+Salamonraja-p
+
+
