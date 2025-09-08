@@ -1,10 +1,11 @@
-📄 E-Commerce Project Summary Report
+## 📄 E-Commerce Project Summary Report
 
- ✅ Project Name:
+ ## ✅ Project Name:
 
   Online E-Commerce Web Application
 
- 🎯 Project Purpose:
+ ## 🎯 Project Purpose:
+ ```
   To design and implement a fully functional e-commerce platform that allows users to:
 
    Register and log in.
@@ -18,9 +19,10 @@
    View their order history.
 
    Admins can manage product listings.
+```
 
-
-🛠 Technologies Used:
+## 🛠 Technologies Used:
+```
   Layer	Technology	Purpose
   Frontend (UI)	HTML, CSS, JavaScript	Building the user interface of the site.
   Backend (Logic)	Java (Spring Boot)	Server-side logic and RESTful API handling.
@@ -28,16 +30,16 @@
   Template Engine	Thymeleaf (optional)	(For HTML rendering if needed)
   Build Tool	Maven	Dependency management and build automation.
   HTTP Client	Fetch API (JavaScript)	Communicating with backend APIs via AJAX calls.
-
-🧱 System Architecture:
-
+```
+## 🧱 System Architecture:
+```
     [Browser] ⇄ [Spring Boot REST API] ⇄ [MySQL Database]
+```
 
+## 🔑 Major Functional Modules:
 
-🔑 Major Functional Modules:
-
- 1. User Module
-
+##  1. User Module
+```
    register.html – Page for user registration
 
    login.html – Page for user authentication
@@ -47,9 +49,9 @@
    UserService.java – Business logic for user management
 
    User.java – Entity that maps to the users table in MySQL
-
- 2. Product Module
-
+```
+##  2. Product Module
+```
    product-list.html – Displays all available products
 
    ProductController.java – Provides /products API endpoints
@@ -59,15 +61,15 @@
    ProductRepository.java – JPA repository for DB access
 
    Product.java – Maps to the product table
-
- 3. Cart Module
-
+```
+ ## 3. Cart Module
+```
    cart.html – Displays cart items and provides a checkout button
 
    JavaScript – Stores cart items using localStorage
-
- 4. Order Module
-
+```
+## 4. Order Module
+```
    OrderController.java – API for placing and fetching orders
 
    OrderService.java – Saves order and links items
@@ -77,10 +79,10 @@
    OrderItem.java – Represents the items in each order
 
    order-history.html – View orders placed by a given email
+```
 
-
-📁 Folder Structure Overview:
-
+## 📁 Folder Structure Overview:
+```
    ecommerce/
    ├── controller/
    │   └── Handles REST APIs for products, orders, and users
@@ -95,9 +97,9 @@
    │   ├── templates/ → Thymeleaf templates (optional)
    │   └── application.properties → Configuration
 
-
-🌐 Key URLs for Testing:
-
+```
+## 🌐 Key URLs for Testing:
+```
  Page	URL
    Home Page	http://localhost:9090/
    Register	http://localhost:9090/register.html
@@ -106,8 +108,8 @@
    Cart	http://localhost:9090/cart.html
    Order History	http://localhost:9090/order-history.html
    Admin Page (Optional)	http://localhost:9090/admin/manage-products.html
-
-✅ Highlights:
+```
+## ✅ Highlights:
 
    Clean separation of frontend/backend logic.
 
@@ -118,7 +120,7 @@
    Cart logic is handled in the browser using localStorage.
 
 
-📌 Future Scope (Optional Enhancements):
+## 📌 Future Scope (Optional Enhancements):
 
    Implement admin login & dashboard.
 
